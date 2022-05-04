@@ -1,0 +1,77 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:sec = "http://www.thymeleaf.org/extras/spring-security">>
+
+<div layout:fragment = "site_content">
+
+    <div class="row mt-5">
+        <div class="col-6 offset-3">
+            <form th:action="@{'/editbook'}" method="post">
+                <input type="hidden" name="id" th:value="${book.id}">
+                <div class="form-group">
+                    <label th:text="#{label.nameOfBook}">Name of book</label>
+                    <input type="text" class="form-control" name="bookName" th:value="${book.bookName}">
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.description}">Description</label>
+                    <textarea class="form-control" name="description" th:text="${book.description}" rows="5">
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.author}">Author</label>
+                    <input type="text" class="form-control" name="author" th:value="${book.author}">
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.genre}"></label>
+                    <select class="form-control" name="typeOfBook">
+                        <option th:each="type: ${typeOfBooks}" th:text="${type.nameOfType}"
+                                th:value="${type.id}" th:selected="${book.typeOfBook.id == type.id}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.price}">Price</label>
+                    <input type="number" class="form-control" name="price" th:value="${book.price}">
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.amount}">Amount</label>
+                    <input type="number" class="form-control" name="amount" th:value="${book.amount}">
+                </div><br>
+                <div class="form-group">
+                    <button class="btn btn-success" th:text="#{button.save}">SAVE</button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger ml-2" data-bs-toggle="modal" data-bs-target="#deleteBook">
+                        DELETE
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteBook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!--                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>-->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+                    <form th:action="@{'/deletebook'}" method="post">
+                        <input type="hidden" name="id" th:value="${book.id}">
+                        <button type="submit" class="btn btn-danger">DELETE</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+</html>

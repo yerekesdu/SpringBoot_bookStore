@@ -1,0 +1,44 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html"
+      xmlns:th = "http://www.thymeleaf.org">
+
+<div layout:fragment = "site_content">
+    <div class="row mt-5">
+        <div class="col-6 offset-3">
+            <form th:action="@{'/addbook'}" method="post">
+                <div class="form-group">
+                    <label th:text="#{label.nameOfBook}"></label>
+                    <input type="text" class="form-control" name="bookName" required>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.description}"></label>
+                    <textarea class="form-control" name="description" rows="5" required>
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.author}"></label>
+                    <input type="text" class="form-control" name="author" required>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.genre}"></label>
+                    <select class="form-control" name="typeOfBook">
+                        <option th:each="type: ${typeOfBooks}" th:text="${type.nameOfType}" th:value="${type.id}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.price}"></label>
+                    <input type="number" class="form-control" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.amount}"></label>
+                    <input type="number" class="form-control" name="amount" required>
+                </div><br>
+                <div class="form-group">
+                    <button class="btn btn-success" th:text="#{button.save}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</html>

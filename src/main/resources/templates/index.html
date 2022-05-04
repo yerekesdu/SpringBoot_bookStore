@@ -1,0 +1,41 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html"
+      xmlns:th = "http://www.thymeleaf.org">
+
+<div layout:fragment = "site_content">
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col" th:text="#{label.name}"></th>
+                    <th scope="col" th:text="#{label.description}"></th>
+                    <th scope="col" th:text="#{label.author}"></th>
+                    <th scope="col" th:text="#{label.genre}"></th>
+                    <th scope="col" th:text="#{label.price}"></th>
+                    <th scope="col" th:text="#{label.amount}"></th>
+                    <th scope="col" th:text="#{label.details}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book: ${books}">
+                    <td th:text="${book.getId()}"></td>
+                    <td th:text="${book.getBookName()}"></td>
+                    <td th:text="${book.getDescription()}" style="max-width: 50%;"></td>
+                    <td th:text="${book.getAuthor()}"></td>
+                    <td th:text="${book.getTypeOfBook().getNameOfType()}"></td>
+                    <td th:text="${book.getPrice()}"></td>
+                    <td th:text="${book.getAmount()}"></td>
+                    <td>
+                        <a th:href="@{'/details/'+${book.getId()}}" class="btn btn-primary btn-sm">Details</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</html>
